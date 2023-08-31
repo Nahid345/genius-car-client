@@ -16,10 +16,12 @@ const AuthProvider = ({ children }) => {
 
 
     const createUser = (email, password) => {
+        setLaoding(true);
         return createUserWithEmailAndPassword(auth, email, password);
     }
 
     const userLogin = (email, password) => {
+        setLaoding(true);
         return signInWithEmailAndPassword(auth, email, password);
 
     }
@@ -38,8 +40,9 @@ const AuthProvider = ({ children }) => {
     useEffect(() => {
 
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
-            console.log(currentUser);
+            // console.log(currentUser);
             setUser(currentUser);
+            setLaoding(false);
         });
 
         return () => {
@@ -58,6 +61,7 @@ const AuthProvider = ({ children }) => {
         googleSignIn,
         provider,
         auth,
+        loading
        
 
 
